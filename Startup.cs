@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using NLog;
+using NLog.Extensions.Logging;
 
 namespace Thomerson.Gatlin
 {
@@ -48,7 +52,8 @@ namespace Thomerson.Gatlin
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        //public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +63,14 @@ namespace Thomerson.Gatlin
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            #region NLog配置
+            LogManager.LoadConfiguration($"{ Directory.GetCurrentDirectory()}\\Nlog.config");
+            //过时
+            //loggerFactory.AddNLog(); // 添加NLog
+            //loggerFactory.ConfigureNLog($"{Directory.GetCurrentDirectory()}\\Nlog.config"); // 添加Nlog.config配置文件
+            //loggerFactory.AddDebug();
+            #endregion
 
             app.UseStaticFiles();
             app.UseCookiePolicy();

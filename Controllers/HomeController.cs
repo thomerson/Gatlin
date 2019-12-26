@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Thomerson.Gatlin.Models;
 
 namespace Thomerson.Gatlin.Controllers
@@ -12,8 +13,15 @@ namespace Thomerson.Gatlin.Controllers
     //[EnableCors("AppDomain")]  //路由跨域设置
     public class HomeController : Controller
     {
+        private readonly ILogger<HomeController> _logger;
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
         public IActionResult Index()
         {
+            _logger.LogInformation("Index page says hello");
             return View();
         }
 
