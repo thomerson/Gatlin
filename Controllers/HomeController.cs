@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NLog;
 using Thomerson.Gatlin.Models;
 
 namespace Thomerson.Gatlin.Controllers
@@ -21,6 +22,12 @@ namespace Thomerson.Gatlin.Controllers
 
         public IActionResult Index()
         {
+            Logger _dblogger = LogManager.GetLogger("DbLogger");
+            LogEventInfo ei = new LogEventInfo();
+            ei.Properties["Desc"] = "我是自定义消息";
+            _dblogger.Info(ei);
+
+
             _logger.LogInformation("Index page says hello");
             return View();
         }
