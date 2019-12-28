@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using NLog;
 using NLog.Extensions.Logging;
 
@@ -47,7 +48,17 @@ namespace Thomerson.Gatlin
             });
             #endregion
 
+            // 启用Session 默认不启用
+            services.AddSession();
+
             services.AddMvc()
+                //返回Json字符串格式
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // 日期格式化 json数据日期带“T” 格式化
+                    options.SerializerSettings.Formatting = Formatting.Indented;  // 返回数据格式缩进(按需配置)
+                    options.SerializerSettings.ContractResolver = new NullWithEmptyStringResolver();  // 字段为字符串返回为null时，默认返回空
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
