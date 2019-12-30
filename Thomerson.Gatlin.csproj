@@ -12,11 +12,17 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.12.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Thomerson.Gatlin.Model\Thomerson.Gatlin.Model.csproj" />
   </ItemGroup>
 
 

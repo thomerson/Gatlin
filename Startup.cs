@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using NLog;
 using NLog.Extensions.Logging;
@@ -51,6 +54,23 @@ namespace Thomerson.Gatlin
 
             // 启用Session 默认不启用
             services.AddSession();
+
+            //添加jwt验证：
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,//是否验证Issuer
+                        ValidateAudience = true,//是否验证Audience
+                        ValidateLifetime = true,//是否验证失效时间
+                        ClockSkew = TimeSpan.FromSeconds(30),  //过期时间 30Min
+                        ValidateIssuerSigningKey = true,//是否验证SecurityKey
+                        ValidAudience = AppCommon.Domain,//Audience
+                        ValidIssuer = AppCommon.Domain,//Issuer，这两项和前面签发jwt的设置一致
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppCommon.SecurityKey))//拿到SecurityKey
+                    };
+                });
+
 
             services.AddMvc()
                 //返回Json字符串格式
@@ -95,6 +115,9 @@ namespace Thomerson.Gatlin
         //public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            //添加jwt验证
+            app.UseAuthentication();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
