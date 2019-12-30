@@ -13,6 +13,7 @@ namespace Thomerson.Gatlin.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize] //权限验证
+    //Authorization: Bearer {token}
     public class DefaultController : ControllerBase
     {
         /// <summary>
