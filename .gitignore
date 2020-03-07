@@ -5,3 +5,8 @@
 /.vs/Thomerson.Gatlin
 /obj
 /bin/Debug/netcoreapp2.2
+/Thomerson.Gatlin/.vs/Thomerson.Gatlin
+/Thomerson.Gatlin/bin/Debug/netcoreapp2.2
+/Thomerson.Gatlin/obj
+/Thomerson.Gatlin.Model/bin/Debug/netstandard2.0
+/Thomerson.Gatlin.Model/obj

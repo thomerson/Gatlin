@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thomerson.Gatlin", "Thomerson.Gatlin.csproj", "{6D54710D-715D-42A2-8845-A691026D46F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thomerson.Gatlin.Model", "..\Thomerson.Gatlin.Model\Thomerson.Gatlin.Model.csproj", "{FA014DC2-2152-4246-B915-976FA7B68994}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thomerson.Gatlin.Model", "..\Thomerson.Gatlin.Model\Thomerson.Gatlin.Model.csproj", "{2E130A49-FE34-4279-8CC2-89EA9227B503}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6D54710D-715D-42A2-8845-A691026D46F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D54710D-715D-42A2-8845-A691026D46F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D54710D-715D-42A2-8845-A691026D46F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA014DC2-2152-4246-B915-976FA7B68994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA014DC2-2152-4246-B915-976FA7B68994}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA014DC2-2152-4246-B915-976FA7B68994}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA014DC2-2152-4246-B915-976FA7B68994}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E130A49-FE34-4279-8CC2-89EA9227B503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E130A49-FE34-4279-8CC2-89EA9227B503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E130A49-FE34-4279-8CC2-89EA9227B503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E130A49-FE34-4279-8CC2-89EA9227B503}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
