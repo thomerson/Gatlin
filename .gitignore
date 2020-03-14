@@ -10,3 +10,10 @@
 /Thomerson.Gatlin/obj
 /Thomerson.Gatlin.Model/bin/Debug/netstandard2.0
 /Thomerson.Gatlin.Model/obj
+/Thomerson.Gatlin.Permission/bin/Debug/netcoreapp3.1
+/Thomerson.Gatlin.Permission/obj
+/Thomerson.Gatlin.Permission.Contract/bin/Debug/netcoreapp3.1
+/Thomerson.Gatlin.Permission.Contract/obj
+/Thomerson.Gatlin.Permission.Realize/bin/Debug/netcoreapp3.1
+/Thomerson.Gatlin.Permission.Realize/obj
+/Thomerson.Gatlin.Model/bin/Release/netstandard2.0
