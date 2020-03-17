@@ -18,3 +18,6 @@
 /Thomerson.Gatlin.Permission.Realize/obj
 /Thomerson.Gatlin.Model/bin/Release/netstandard2.0
 /Thomerson.Gatlin.Model/bin/Debug/netcoreapp2.2
+/Thomerson.Gatlin.Model/bin/Debug/netcoreapp3.1
+/Thomerson.Gatlin/Thomerson.Gatlin/bin/Debug/netcoreapp3.1
+/Thomerson.Gatlin/Thomerson.Gatlin/obj
