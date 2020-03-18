@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using NLog;
 using NLog.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
+using Thomerson.Gatlin.Midware;
 
 namespace Thomerson.Gatlin
 {
@@ -32,83 +33,23 @@ namespace Thomerson.Gatlin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            //Cookie 设置
+            services.AddCookieMidware();
 
-            #region 跨域设置
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AppDomain", builder =>
-                {
-                    builder.AllowAnyOrigin() // Allow access to any source from the host
-                    .AllowAnyMethod()        // Ensures that the policy allows any method
-                    .AllowAnyHeader()        // Ensures that the policy allows any header
-                    .AllowCredentials();     // Specify the processing of cookie
-                });
-            });
-            #endregion
+            //跨域设置
+            services.AddCorsMidware();
 
             // 启用Session 默认不启用
             services.AddSession();
 
             //添加jwt验证：
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,//是否验证Issuer
-                        ValidateAudience = true,//是否验证Audience
-                        ValidateLifetime = true,//是否验证失效时间
-                        ClockSkew = TimeSpan.FromSeconds(30),  //过期时间 30Min
-                        ValidateIssuerSigningKey = true,//是否验证SecurityKey
-                        ValidAudience = AppCommon.Domain,//Audience
-                        ValidIssuer = AppCommon.Domain,//Issuer，这两项和前面签发jwt的设置一致
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppCommon.SecurityKey))//拿到SecurityKey
-                    };
-                });
+            services.AddJWTAuthenticationMidware();
 
-
-            services.AddMvc()
-                //返回Json字符串格式
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // 日期格式化 json数据日期带“T” 格式化
-                    options.SerializerSettings.Formatting = Formatting.Indented;  // 返回数据格式缩进(按需配置)
-                    options.SerializerSettings.ContractResolver = new NullWithEmptyStringResolver();  // 字段为字符串返回为null时，默认返回空
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //MVC 配置
+            services.AddMvcMidWare();
 
             //注册Swagger生成器，定义一个和多个Swagger 文档
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Title = "Swagger API",
-                    Version = "v1",
-                    Description = "Gatlin",
-                    TermsOfService = "None",
-                    Contact = new Contact
-                    {
-                        Name = "thomerson",
-                        Email = string.Empty,
-                        Url = "http://www.cnblogs.com/thomerson/"
-                    },
-                    License = new License
-                    {
-                        Name = "thomerson",
-                        Url = "https://github.com/thomerson/"
-                    }
-                });
-
-                // 为 Swagger JSON and UI设置xml文档注释路径
-                var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);//获取应用程序所在目录（绝对，不受工作目录影响，建议采用此方法获取路径）
-                var xmlPath = Path.Combine(basePath, "Thomerson.Gatlin.xml");
-                c.IncludeXmlComments(xmlPath);
-            });
+            services.AddSwaggerGenMidware();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -136,32 +77,16 @@ namespace Thomerson.Gatlin
             #endregion
 
             app.UseStaticFiles();
+
             app.UseCookiePolicy();
 
-            app.UseCors("AppDomain");//全局的跨域设置
+            //全局的跨域设置  必须位于UserMvc之前 
+            app.UseCORSMidware();
 
-            app.UseMvc(routes =>
-            {
-                // 自定义路由
-                routes.MapRoute(
-                  name: "default1",
-                  template: "api/{controller}/{action}/{id?}",
-                  defaults: new { controller = "Values", action = "Index" });
+            // MVC Route
+            app.UseMvcMidWare();
 
-                // 默认路由
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-
-            //启用中间件服务生成Swagger作为JSON终结点
-            app.UseSwagger();
-            //启用中间件服务对swagger-ui，指定Swagger JSON终结点
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                //c.RoutePrefix = string.Empty; //设置根路径直接访问SwaggerUI
-            });
+            app.UseSwaggerGenMidware();
         }
     }
 }
