@@ -78,7 +78,8 @@ namespace Thomerson.Gatlin
 
             app.UseStaticFiles();
 
-            app.UseCookiePolicy();
+            //Cookie 设置
+            app.UseCookieMidware();
 
             //全局的跨域设置  必须位于UserMvc之前 
             app.UseCORSMidware();

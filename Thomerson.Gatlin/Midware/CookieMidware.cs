@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Thomerson.Gatlin.Midware
 {
@@ -19,6 +15,12 @@ namespace Thomerson.Gatlin.Midware
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             return services;
+        }
+
+        public static IApplicationBuilder UseCookieMidware(this IApplicationBuilder app)
+        {
+            app.UseCookiePolicy();
+            return app;
         }
     }
 }
