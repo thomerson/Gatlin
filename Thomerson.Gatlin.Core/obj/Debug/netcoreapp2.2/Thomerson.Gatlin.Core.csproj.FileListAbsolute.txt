@@ -1,0 +1,9 @@
+D:\git\Gatlin\Thomerson.Gatlin.Core\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Core.deps.json
+D:\git\Gatlin\Thomerson.Gatlin.Core\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Core.dll
+D:\git\Gatlin\Thomerson.Gatlin.Core\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Core.pdb
+D:\git\Gatlin\Thomerson.Gatlin.Core\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Core.AssemblyInfoInputs.cache
+D:\git\Gatlin\Thomerson.Gatlin.Core\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Core.AssemblyInfo.cs
+D:\git\Gatlin\Thomerson.Gatlin.Core\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Core.dll
+D:\git\Gatlin\Thomerson.Gatlin.Core\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Core.pdb
+D:\git\Gatlin\Thomerson.Gatlin.Core\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Core.runtimeconfig.json
+D:\git\Gatlin\Thomerson.Gatlin.Core\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Core.runtimeconfig.dev.json

@@ -1,0 +1,13 @@
+D:\git\Gatlin\Thomerson.Gatlin.Repository\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Contract.dll
+D:\git\Gatlin\Thomerson.Gatlin.Repository\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Repository.csprojAssemblyReference.cache
+D:\git\Gatlin\Thomerson.Gatlin.Repository\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Repository.AssemblyInfoInputs.cache
+D:\git\Gatlin\Thomerson.Gatlin.Repository\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Repository.AssemblyInfo.cs
+D:\git\Gatlin\Thomerson.Gatlin.Repository\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Model.dll
+D:\git\Gatlin\Thomerson.Gatlin.Repository\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Model.pdb
+D:\git\Gatlin\Thomerson.Gatlin.Repository\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Repository.deps.json
+D:\git\Gatlin\Thomerson.Gatlin.Repository\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Repository.dll
+D:\git\Gatlin\Thomerson.Gatlin.Repository\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Repository.pdb
+D:\git\Gatlin\Thomerson.Gatlin.Repository\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Contract.pdb
+D:\git\Gatlin\Thomerson.Gatlin.Repository\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Repository.csproj.CopyComplete
+D:\git\Gatlin\Thomerson.Gatlin.Repository\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Repository.dll
+D:\git\Gatlin\Thomerson.Gatlin.Repository\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Repository.pdb

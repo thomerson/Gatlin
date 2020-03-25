@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.30" />
+    <PackageReference Include="DapperExtensions.NetCore" Version="2.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Thomerson.Gatlin.Contract\Thomerson.Gatlin.Contract.csproj" />
+    <ProjectReference Include="..\Thomerson.Gatlin.Model\Thomerson.Gatlin.Model.csproj" />
+  </ItemGroup>
+
+</Project>

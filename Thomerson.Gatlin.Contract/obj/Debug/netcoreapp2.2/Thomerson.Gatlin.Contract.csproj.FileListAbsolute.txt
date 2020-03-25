@@ -1,0 +1,7 @@
+D:\git\Gatlin\Thomerson.Gatlin.Contract\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Contract.deps.json
+D:\git\Gatlin\Thomerson.Gatlin.Contract\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Contract.dll
+D:\git\Gatlin\Thomerson.Gatlin.Contract\bin\Debug\netcoreapp2.2\Thomerson.Gatlin.Contract.pdb
+D:\git\Gatlin\Thomerson.Gatlin.Contract\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Contract.AssemblyInfoInputs.cache
+D:\git\Gatlin\Thomerson.Gatlin.Contract\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Contract.AssemblyInfo.cs
+D:\git\Gatlin\Thomerson.Gatlin.Contract\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Contract.dll
+D:\git\Gatlin\Thomerson.Gatlin.Contract\obj\Debug\netcoreapp2.2\Thomerson.Gatlin.Contract.pdb
