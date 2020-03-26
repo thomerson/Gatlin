@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Thomerson.Gatlin.Core
 {
-    public class JsonConfigurationCore
+    public static class JsonConfigurationCore
     {
         /// <summary>
         /// json 配置读取
@@ -27,5 +27,7 @@ namespace Thomerson.Gatlin.Core
                 .Value;
             return appconfig;
         }
+
+
     }
 }
