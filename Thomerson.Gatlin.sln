@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thomerson.Gatlin.Repository
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thomerson.Gatlin.Contract", "Thomerson.Gatlin.Contract\Thomerson.Gatlin.Contract.csproj", "{2C1EFBCE-0976-4F8B-91AE-4B909F26CEBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thomerson.Gatlin.Core", "Thomerson.Gatlin.Core\Thomerson.Gatlin.Core.csproj", "{E7A4E949-2BF4-48E0-9A42-1F5C60FFC437}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thomerson.Gatlin.Core", "Thomerson.Gatlin.Core\Thomerson.Gatlin.Core.csproj", "{E7A4E949-2BF4-48E0-9A42-1F5C60FFC437}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thomerson.Gatlin.Utils", "Thomerson.Gatlin.Utils\Thomerson.Gatlin.Utils.csproj", "{CD22999A-36FE-4BF4-9DFD-101BC266701D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{E7A4E949-2BF4-48E0-9A42-1F5C60FFC437}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7A4E949-2BF4-48E0-9A42-1F5C60FFC437}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A4E949-2BF4-48E0-9A42-1F5C60FFC437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD22999A-36FE-4BF4-9DFD-101BC266701D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD22999A-36FE-4BF4-9DFD-101BC266701D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD22999A-36FE-4BF4-9DFD-101BC266701D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD22999A-36FE-4BF4-9DFD-101BC266701D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

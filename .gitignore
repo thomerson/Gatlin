@@ -19,3 +19,8 @@
 /Thomerson.Gatlin.Model/bin/Release/netstandard2.0
 /Thomerson.Gatlin.Model/bin/Debug/netcoreapp2.2
 /Thomerson.Gatlin.Model/bin/Debug/netcoreapp3.1
+/Thomerson.Gatlin.Contract/obj/Debug/netcoreapp2.2
+/Thomerson.Gatlin.Utils/obj
+/Thomerson.Gatlin.Core/obj
+/Thomerson.Gatlin.Core/bin
+/Thomerson.Gatlin.Repository/obj

@@ -10,7 +10,7 @@ namespace Thomerson.Gatlin.Core
     {
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
-            return type.GetProperties()
+            return type?.GetProperties()
                        .Select(p =>
                        {
                            var jp = base.CreateProperty(p, memberSerialization);
