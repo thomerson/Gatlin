@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -19,6 +19,11 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Thomerson.Gatlin.Contract\Thomerson.Gatlin.Contract.csproj" />
+    <ProjectReference Include="..\Thomerson.Gatlin.Repository\Thomerson.Gatlin.Repository.csproj" />
   </ItemGroup>
 
 </Project>

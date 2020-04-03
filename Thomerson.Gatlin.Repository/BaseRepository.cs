@@ -13,15 +13,15 @@ namespace Thomerson.Gatlin.Repository
         protected DbOption _dbOption;
         protected IDbConnection _dbConnection;
 
-        public BaseRepository(IOptionsSnapshot<DbOption> options)
-        {
-            _dbOption = options.Get(nameof(DbOption));
-            if (_dbOption == null)
-            {
-                throw new ArgumentNullException(nameof(DbOption));
-            }
-            _dbConnection = ConnectionFactory.CreateSqlConnection();
-        }
+        //public BaseRepository(IOptionsSnapshot<DbOption> options)
+        //{
+        //    _dbOption = options.Get(nameof(DbOption));
+        //    if (_dbOption == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(DbOption));
+        //    }
+        //    _dbConnection = ConnectionFactory.CreateSqlConnection();
+        //}
 
         public bool Delete(T t)
         {
