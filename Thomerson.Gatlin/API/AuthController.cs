@@ -5,8 +5,10 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Thomerson.Gatlin.Contract;
 using Thomerson.Gatlin.Core;
 using Thomerson.Gatlin.Model.User;
+using Thomerson.Gatlin.Utils;
 
 namespace Thomerson.Gatlin.Controllers
 {
@@ -14,14 +16,23 @@ namespace Thomerson.Gatlin.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        IUserService Service;
+        public AuthController(IUserService service)
+        {
+            Service = service;
+        }
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         public IActionResult Login([FromBody] UserLogin user)
         {
-            if (!string.IsNullOrEmpty(user.UserId) && !string.IsNullOrEmpty(user.Password))
+            var currentUser = Service.Get(user.UserId);
+            if (currentUser == null)
             {
-                //TODO 用户名密码验证
-
+                var password = MD5Core.ToMD5($"{user.UserId}{user.Password}{currentUser.Salt}");
+                if (password != currentUser.Password)
+                {
+                    return BadRequest(new { message = "用户名或密码不正确" });
+                }
                 var claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Nbf,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}") ,
@@ -44,40 +55,7 @@ namespace Thomerson.Gatlin.Controllers
             }
             else
             {
-                return BadRequest(new { message = "username or password is incorrect." });
-            }
-        }
-
-        public IActionResult ValidateLogin([FromBody] ValidateUserLogin user)
-        {
-            //验证validate
-            if (!string.IsNullOrEmpty(user.UserId) && !string.IsNullOrEmpty(user.Password))
-            {
-                //TODO 用户名密码验证
-
-                var claims = new[]
-                {
-                    new Claim(JwtRegisteredClaimNames.Nbf,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}") ,
-                    new Claim (JwtRegisteredClaimNames.Exp,$"{new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds()}"),
-                    new Claim(ClaimTypes.NameIdentifier, user.UserId)  //token 添加用户名
-                };
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppCommon.SecurityKey));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var token = new JwtSecurityToken(
-                    issuer: AppCommon.Domain,
-                    audience: AppCommon.Domain,
-                    claims: claims,
-                    expires: DateTime.Now.AddMinutes(30),
-                    signingCredentials: creds);
-
-                return Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token)
-                });
-            }
-            else
-            {
-                return BadRequest(new { message = "username or password is incorrect." });
+                return BadRequest(new { message = "用户名或密码不正确" });
             }
         }
 

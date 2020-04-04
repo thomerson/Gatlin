@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Thomerson.Gatlin.Contract\Thomerson.Gatlin.Contract.csproj" />
+    <ProjectReference Include="..\Thomerson.Gatlin.Core\Thomerson.Gatlin.Core.csproj" />
     <ProjectReference Include="..\Thomerson.Gatlin.Model\Thomerson.Gatlin.Model.csproj" />
   </ItemGroup>
 

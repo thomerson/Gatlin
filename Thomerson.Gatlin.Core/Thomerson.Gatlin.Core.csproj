@@ -21,9 +21,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Thomerson.Gatlin.Contract\Thomerson.Gatlin.Contract.csproj" />
-    <ProjectReference Include="..\Thomerson.Gatlin.Repository\Thomerson.Gatlin.Repository.csproj" />
-  </ItemGroup>
-
 </Project>

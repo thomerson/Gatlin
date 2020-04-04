@@ -3,10 +3,10 @@ using Microsoft.Extensions.Configuration.Json;
 
 namespace Thomerson.Gatlin.Core
 {
-    public static class AppConfigurtaionServices
+    public static class AppSettings
     {
         public static IConfiguration Configuration { get; set; }
-        static AppConfigurtaionServices()
+        static AppSettings()
         {
             //ReloadOnChange = true 当appsettings.json被修改时重新加载            
             Configuration = new ConfigurationBuilder()

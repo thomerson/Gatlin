@@ -13,15 +13,10 @@ namespace Thomerson.Gatlin.Repository
         protected DbOption _dbOption;
         protected IDbConnection _dbConnection;
 
-        //public BaseRepository(IOptionsSnapshot<DbOption> options)
-        //{
-        //    _dbOption = options.Get(nameof(DbOption));
-        //    if (_dbOption == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(DbOption));
-        //    }
-        //    _dbConnection = ConnectionFactory.CreateSqlConnection();
-        //}
+        public BaseRepository()
+        {
+            _dbConnection = ConnectionFactory.CreateSqlConnection();
+        }
 
         public bool Delete(T t)
         {
@@ -31,7 +26,7 @@ namespace Thomerson.Gatlin.Repository
             }
         }
 
-        public T Get(object id)
+        public T Get(Guid id)
         {
             using (var conn = ConnectionFactory.CreateSqlConnection())
             {
@@ -47,14 +42,20 @@ namespace Thomerson.Gatlin.Repository
             }
         }
 
-        public T Insert(T apply)
+        public T Insert(T t)
         {
-            throw new NotImplementedException();
+            using (var conn = ConnectionFactory.CreateSqlConnection())
+            {
+                return conn.Insert<T>(t);
+            }
         }
 
         public bool Update(T t)
         {
-            throw new NotImplementedException();
+            using (var conn = ConnectionFactory.CreateSqlConnection())
+            {
+                return conn.Update<T>(t);
+            }
         }
     }
 }

@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using Thomerson.Gatlin.Core;
+
 
 namespace Thomerson.Gatlin.Repository
 {
     public class ConnectionFactory
     {
+        private static readonly string ConnectionString = AppSettings.GetConnectionString("MSConnection");
 
         public static IDbConnection CreateConnection<T>() where T : IDbConnection, new()
         {
             IDbConnection connection = new T();
-            connection.ConnectionString = "";//TODO
+            connection.ConnectionString = ConnectionString;//TODO
             connection.Open();
             return connection;
         }
@@ -21,10 +24,5 @@ namespace Thomerson.Gatlin.Repository
         {
             return CreateConnection<SqlConnection>();
         }
-
-        //public static IDbConnection CreateMySqlConnection(string connectionString)
-        //{
-        //    return CreateConnection<MySql.Data.MySqlClient.MySqlConnection>(connectionString);
-        //}
     }
 }

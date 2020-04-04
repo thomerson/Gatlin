@@ -8,7 +8,7 @@ namespace Thomerson.Gatlin.Contract
     {
         IEnumerable<T> GetList();
 
-        T Get(object id);
+        T Get(Guid id);
 
         bool Update(T t);
 

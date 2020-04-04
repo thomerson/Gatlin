@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Thomerson.Gatlin.Core\Thomerson.Gatlin.Core.csproj" />
     <ProjectReference Include="..\Thomerson.Gatlin.Model\Thomerson.Gatlin.Model.csproj" />
     <ProjectReference Include="..\Thomerson.Gatlin.Repository\Thomerson.Gatlin.Repository.csproj" />
+    <ProjectReference Include="..\Thomerson.Gatlin.Utils\Thomerson.Gatlin.Utils.csproj" />
   </ItemGroup>
 
 
@@ -33,6 +34,11 @@
     <Content Update="Nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\imags\" />
   </ItemGroup>
 
 </Project>

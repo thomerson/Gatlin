@@ -1,0 +1,96 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <el-form :rules="rules" label-width="80px" :model="user" ref="user">
+                <el-form-item label="账号" :required="true" prop="UserId">
+                    <el-input v-model="user.UserId"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" :required="true" prop="Password">
+                    <el-input type="password" v-model="user.Password"></el-input>
+                </el-form-item>
+                <el-form-item label="确认密码" :required="true" prop="RePassword">
+                    <el-input type="password" v-model="user.RePassword"></el-input>
+                </el-form-item>
+                <el-form-item label="昵称" :required="true" prop="Name">
+                    <el-input v-model="user.Name"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @@click="register('user')">注册</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
+    </div>
+
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    user: {
+                        UserId: '',
+                        Password: '',
+                        RePassword: ''
+                    },
+                    rules: {
+                        UserId: [
+                            { required: true, message: '请输入账号', trigger: 'blur' },
+                            { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+                        ],
+                        Password: [
+                            { required: true, message: '请输入密码', trigger: 'blur' },
+                            { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+                        ],
+                        RePassword: [
+                            {
+                                validator: function (rule, value, callback) {
+                                    if (value === '') {
+                                        callback(new Error('请再次输入密码'));
+                                    } else if (value !== this.user.Password) {
+                                        callback(new Error('两次输入密码不一致!'));
+                                    } else {
+                                        callback();
+                                    }
+                                }, trigger: 'blur'
+                            }
+                        ],
+                        Name: [
+                            { required: true, message: '请输入昵称', trigger: 'blur' },
+                            { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+                        ]
+                    }
+                }
+            },
+            methods: {
+                register: function (formData) {
+                    var vm = this;
+                    this.$refs[formData].validate((valid) => {
+                        if (valid) {
+                            var url = "/api/auth/register";
+                        }
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+</html>
