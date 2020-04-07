@@ -28,3 +28,5 @@
 /Thomerson.Gatlin.Contract/obj
 /Thomerson.Gatlin.Repository/bin
 /Thomerson.Gatlin.Utils/bin
+/Thomerson.Gatlin.Migration/bin/Debug/netcoreapp3.1
+/Thomerson.Gatlin.Migration/obj
