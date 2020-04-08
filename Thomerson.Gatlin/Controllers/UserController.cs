@@ -13,5 +13,10 @@ namespace Thomerson.Gatlin.Controllers
         {
             return View();
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutVue.cshtml";
+}
+
+<div>
+    test
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    UserId: '',
+                    Password: ''
+                }
+            },
+            methods: {
+                get: function () {
+                    var vm = this;
+                    var url = "/api/auth/login";
+                }
+            }
+        })
+    </script>
+}

@@ -1,14 +1,15 @@
 ﻿using DapperExtensions;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Thomerson.Gatlin.Contract;
+using Thomerson.Gatlin.Model;
 using Thomerson.Gatlin.Model.Options;
 
 namespace Thomerson.Gatlin.Repository
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
     {
         protected DbOption _dbOption;
         protected IDbConnection _dbConnection;
@@ -39,6 +40,17 @@ namespace Thomerson.Gatlin.Repository
             using (var conn = ConnectionFactory.CreateSqlConnection())
             {
                 return conn.GetList<T>();
+            }
+        }
+
+        public Tuple<int, IEnumerable<T>> GetPage(object predicate, int pageindex, int pageSize)
+        {
+            using (var conn = ConnectionFactory.CreateSqlConnection())
+            {
+                var total = conn.Count<T>(predicate);
+                var sort = new List<ISort>();
+                sort.Add(new Sort() { PropertyName = "Id", Ascending = true });
+                return new Tuple<int, IEnumerable<T>>(total, conn.GetPage<T>(predicate, sort, pageindex, pageSize).ToList());
             }
         }
 

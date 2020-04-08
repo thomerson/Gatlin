@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Thomerson.Gatlin.Contract
 {
@@ -15,5 +14,7 @@ namespace Thomerson.Gatlin.Contract
         T Insert(T t);
 
         bool Delete(T t);
+
+        Tuple<int, IEnumerable<T>> GetPage(object predicate, int pageindex, int pageSize);
     }
 }
