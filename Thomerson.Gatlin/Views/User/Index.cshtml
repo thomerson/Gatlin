@@ -20,7 +20,11 @@
             methods: {
                 get: function () {
                     var vm = this;
-                    var url = "/api/auth/login";
+                    var url = "/api/user/getpage";
+                },
+                save: function () {
+                    var vm = this;
+                    var url = "/api/user/login";
                 }
             }
         })

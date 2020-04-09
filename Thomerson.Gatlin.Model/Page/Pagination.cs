@@ -1,4 +1,6 @@
-﻿namespace Thomerson.Gatlin.Model.Page
+﻿using System.Collections.Generic;
+
+namespace Thomerson.Gatlin.Model.Page
 {
     public class Pagination
     {
@@ -14,9 +16,6 @@
             get { return _PageSize > 0 ? _CurrentPage : 20; }
             set { _CurrentPage = value; }
         }
-
-        public string OyderBy { get; set; }
-        public string OyderByDesc { get; set; }
-
+        public List<OrderBy> OyderBy { get; set; }
     }
 }

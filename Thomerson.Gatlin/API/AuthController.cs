@@ -5,6 +5,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Thomerson.Gatlin.Account.Model;
 using Thomerson.Gatlin.Contract;
 using Thomerson.Gatlin.Core;
 using Thomerson.Gatlin.Model.User;
@@ -57,6 +58,24 @@ namespace Thomerson.Gatlin.Controllers
             {
                 return BadRequest(new { message = "用户名或密码不正确" });
             }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult Register([FromBody] User model)
+        {
+
+            var currentUser = Service.Get(model.UserId);
+            if (currentUser != null)
+            {
+                return BadRequest(new { message = "账号已存在" });
+            }
+
+            model.Salt = Guid.NewGuid().ToString().Replace("-", "");
+            model.Password = MD5Core.ToMD5($"{model.UserId}{model.Password}{model.Salt}");
+
+            Service.Insert(model);
+            return Ok();
         }
 
         public IActionResult Logout()

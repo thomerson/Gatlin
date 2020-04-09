@@ -49,7 +49,11 @@ namespace Thomerson.Gatlin.Repository
             {
                 var total = conn.Count<T>(predicate);
                 var sort = new List<ISort>();
-                sort.Add(new Sort() { PropertyName = "Id", Ascending = true });
+                sort.Add(new Sort()
+                {
+                    PropertyName = nameof(BaseModel.Id),
+                    Ascending = true
+                });
                 return new Tuple<int, IEnumerable<T>>(total, conn.GetPage<T>(predicate, sort, pageindex, pageSize).ToList());
             }
         }

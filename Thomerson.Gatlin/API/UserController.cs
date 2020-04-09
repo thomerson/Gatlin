@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Thomerson.Gatlin.Account.Model;
 using Thomerson.Gatlin.Contract;
+using Thomerson.Gatlin.Model.Criteria;
+using Thomerson.Gatlin.Model.Page;
 
 namespace Thomerson.Gatlin.API
 {
@@ -19,9 +18,28 @@ namespace Thomerson.Gatlin.API
             UserService = service;
         }
 
-        public List<User> Get()
+        [HttpGet]
+        public Tuple<int, IEnumerable<User>> GetPage(UserCriteria criteria, Pagination pagination)
         {
-            return new List<User>();
+            return UserService.GetPage(criteria, pagination);
+        }
+
+        [HttpPost]
+        public void Add(User model)
+        {
+            UserService.Insert(model);
+        }
+
+        [HttpPut]
+        public void Update(User model)
+        {
+            UserService.Update(model);
+        }
+
+        [HttpDelete]
+        public void Delete(User model)
+        {
+            UserService.Delete(model);
         }
     }
 }

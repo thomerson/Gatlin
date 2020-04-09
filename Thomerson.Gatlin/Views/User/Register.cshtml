@@ -82,10 +82,12 @@
             },
             methods: {
                 register: function (formData) {
-                    var vm = this;
+                    var vm = this, url = "/api/auth/register", param = vm.user;
                     this.$refs[formData].validate((valid) => {
                         if (valid) {
-                            var url = "/api/auth/register";
+                            axios.post(url, param).then(function (response) {
+                                console.log(response.data);
+                            });
                         }
                     });
                 }
