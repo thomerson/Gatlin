@@ -15,7 +15,7 @@ namespace Thomerson.Gatlin.DI
             services.AddScoped<IUserService, UserRealize>();
             //services.AddSingleton<ISingletonService, SingletonService>();
 
-            services.AddMvc();
+            //services.AddMvc();
         }
     }
 }

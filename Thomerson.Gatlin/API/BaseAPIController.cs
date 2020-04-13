@@ -24,7 +24,7 @@ namespace Thomerson.Gatlin.Controllers
         #region Cookie
 
 
-        protected void AddCookies(string key, string val)    //删除指定的cookie
+        protected void AddCookies(string key, string val)
         {
             Response.Cookies.Append(key, val
                 //, new Microsoft.AspNetCore.Http.CookieOptions()

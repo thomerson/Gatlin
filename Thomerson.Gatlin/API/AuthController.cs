@@ -22,8 +22,10 @@ namespace Thomerson.Gatlin.Controllers
         {
             Service = service;
         }
+
         [AllowAnonymous]
         [HttpPost]
+        [Route("login")]
         public IActionResult Login([FromBody] UserLogin user)
         {
             var currentUser = Service.Get(user.UserId);
@@ -62,9 +64,9 @@ namespace Thomerson.Gatlin.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Register([FromBody] User model)
+        [Route("register")]
+        public IActionResult Register(User model)
         {
-
             var currentUser = Service.Get(model.UserId);
             if (currentUser != null)
             {
@@ -78,6 +80,9 @@ namespace Thomerson.Gatlin.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("logout")]
         public IActionResult Logout()
         {
             return Ok("");
@@ -86,7 +91,7 @@ namespace Thomerson.Gatlin.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("api/nopermission")]
+        [Route("nopermission")]
         public IActionResult NoPermission()
         {
             return Forbid("No Permission!");

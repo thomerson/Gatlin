@@ -18,13 +18,15 @@ namespace Thomerson.Gatlin.API
             UserService = service;
         }
 
-        [HttpGet]
-        public Tuple<int, IEnumerable<User>> GetPage(UserCriteria criteria, Pagination pagination)
+        [HttpPost]
+        [Route("getpage")]
+        public Tuple<int, IEnumerable<User>> GetPage(UserCriteria criteria)
         {
-            return UserService.GetPage(criteria, pagination);
+            return UserService.GetPage(criteria);
         }
 
         [HttpPost]
+        [Route("add")]
         public void Add(User model)
         {
             UserService.Insert(model);

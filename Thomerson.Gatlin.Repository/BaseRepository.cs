@@ -43,7 +43,7 @@ namespace Thomerson.Gatlin.Repository
             }
         }
 
-        public Tuple<int, IEnumerable<T>> GetPage(object predicate, int pageindex, int pageSize)
+        public Tuple<int, IEnumerable<T>> PageQuery(object predicate, int pageindex, int pageSize)
         {
             using (var conn = ConnectionFactory.CreateSqlConnection())
             {

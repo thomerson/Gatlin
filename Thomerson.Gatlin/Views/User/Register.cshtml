@@ -28,6 +28,15 @@
                 <el-form-item label="昵称" :required="true" prop="Name">
                     <el-input v-model="user.Name"></el-input>
                 </el-form-item>
+                <el-form-item label="英文名">
+                    <el-input v-model="user.EnglishName"></el-input>
+                </el-form-item>
+                <el-form-item label="手机号">
+                    <el-input v-model="user.Phone"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱">
+                    <el-input v-model="user.Email"></el-input>
+                </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @@click="register('user')">注册</el-button>
                 </el-form-item>
@@ -45,6 +54,16 @@
         new Vue({
             el: '#app',
             data: function () {
+                var validateRePassword = (rule, value, callback) => {
+                    if (value === '') {
+                        callback(new Error('请再次输入密码'))
+                    } else if (value !== this.user.Password) {
+                        callback(new Error('两次输入密码不一致!'))
+                    } else {
+                        callback()
+                    }
+                }
+
                 return {
                     user: {
                         UserId: '',
@@ -54,7 +73,7 @@
                     rules: {
                         UserId: [
                             { required: true, message: '请输入账号', trigger: 'blur' },
-                            { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+                            { min: 4, max: 15, message: '长度在 4 到 15 个字符', trigger: 'blur' }
                         ],
                         Password: [
                             { required: true, message: '请输入密码', trigger: 'blur' },
@@ -62,20 +81,13 @@
                         ],
                         RePassword: [
                             {
-                                validator: function (rule, value, callback) {
-                                    if (value === '') {
-                                        callback(new Error('请再次输入密码'));
-                                    } else if (value !== this.user.Password) {
-                                        callback(new Error('两次输入密码不一致!'));
-                                    } else {
-                                        callback();
-                                    }
-                                }, trigger: 'blur'
+                                validator: validateRePassword,
+                                trigger: 'blur'
                             }
                         ],
                         Name: [
                             { required: true, message: '请输入昵称', trigger: 'blur' },
-                            { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+                            { min: 4, max: 15, message: '长度在 4 到 15 个字符', trigger: 'blur' }
                         ]
                     }
                 }
@@ -83,6 +95,8 @@
             methods: {
                 register: function (formData) {
                     var vm = this, url = "/api/auth/register", param = vm.user;
+                    param.Password = window.btoa(param.Password);  //base64 加密
+                    param.RePassword = window.btoa(param.RePassword);  //base64 加密
                     this.$refs[formData].validate((valid) => {
                         if (valid) {
                             axios.post(url, param).then(function (response) {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Thomerson.Gatlin.Account.Model;
 using Thomerson.Gatlin.Contract;
+using Thomerson.Gatlin.Model.Criteria;
 using Thomerson.Gatlin.Model.Page;
 
 namespace Thomerson.Gatlin.Repository
@@ -18,13 +19,14 @@ namespace Thomerson.Gatlin.Repository
             }
         }
 
-        public Tuple<int, IEnumerable<User>> GetPage(object predicate, Pagination pagination)
+        public Tuple<int, IEnumerable<User>> GetPage(UserCriteria criteria)
         {
+            //object predicate
             using (var conn = ConnectionFactory.CreateSqlConnection())
             {
-                var total = conn.Count<User>(predicate);
+                var total = conn.Count<User>(null);
                 var sort = new List<ISort>();
-                foreach (var item in pagination.OyderBy)
+                foreach (var item in criteria.OyderBy)
                 {
                     sort.Add(new Sort()
                     {
@@ -35,7 +37,7 @@ namespace Thomerson.Gatlin.Repository
 
                 return new Tuple<int, IEnumerable<User>>(
                     total,
-                    conn.GetPage<User>(predicate, sort, pagination.CurrentPage, pagination.PageSize
+                    conn.GetPage<User>(null, sort, criteria.CurrentPage, criteria.PageSize
                     ).ToList());
             }
         }

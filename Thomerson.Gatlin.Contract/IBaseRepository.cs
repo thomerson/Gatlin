@@ -15,6 +15,6 @@ namespace Thomerson.Gatlin.Contract
 
         bool Delete(T t);
 
-        Tuple<int, IEnumerable<T>> GetPage(object predicate, int pageindex, int pageSize);
+        Tuple<int, IEnumerable<T>> PageQuery(object predicate, int pageindex, int pageSize);
     }
 }
