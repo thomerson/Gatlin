@@ -33,6 +33,8 @@ namespace Thomerson.Gatlin
             //添加jwt验证：
             services.AddJWTAuthenticationMidware();
 
+            //DI
+            services.AddIOCMidware();
             //MVC 配置
             services.AddMvcMidWare();
 

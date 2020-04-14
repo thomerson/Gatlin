@@ -2,20 +2,20 @@
 using Thomerson.Gatlin.Contract;
 using Thomerson.Gatlin.Repository;
 
-namespace Thomerson.Gatlin.DI
+namespace Thomerson.Gatlin
 {
     /// <summary>
     /// service DependencyInjection
     /// </summary>
-    public class ServiceDI
+    public static class IOCMidware
     {
-        public void ConfigureServices(IServiceCollection services)
+        public static IServiceCollection AddIOCMidware(this IServiceCollection services)
         {
             //services.AddTransient<ITransientService, TransientService>();
             services.AddScoped<IUserService, UserRealize>();
             //services.AddSingleton<ISingletonService, SingletonService>();
 
-            //services.AddMvc();
+            return services;
         }
     }
 }

@@ -1,7 +1,7 @@
 IF NOT EXISTS (SELECT 1 FROM sysObjects  WHERE Id=OBJECT_ID(N'[dbo].[User]') and xtype='U')
 BEGIN
 CREATE TABLE [dbo].[User](
-    [ID] [int] IDENTITY(1,1) NOT NULL,
+    [ID] [Guid] PRIMARY KEY NOT NULL,
     [UserId] [varchar](128) NULL,
     [Name] [varchar](128) NULL,
     [EnglishName] [varchar](128) NULL,
