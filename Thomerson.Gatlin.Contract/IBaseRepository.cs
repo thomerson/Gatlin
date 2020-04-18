@@ -11,7 +11,7 @@ namespace Thomerson.Gatlin.Contract
 
         bool Update(T t);
 
-        T Insert(T t);
+        Guid Insert(T t);
 
         bool Delete(T t);
 

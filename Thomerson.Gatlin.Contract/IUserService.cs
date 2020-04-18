@@ -6,7 +6,7 @@ using Thomerson.Gatlin.Model.Page;
 
 namespace Thomerson.Gatlin.Contract
 {
-    public interface IUserService : IBaseRepository<User>
+    public interface IUserService : IBaseDbRepository<User>
     {
         User Get(string userId);
 

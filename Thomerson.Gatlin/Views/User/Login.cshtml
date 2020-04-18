@@ -16,22 +16,21 @@
             top: 50%;
             width: 30%;
         }
-
     </style>
 </head>
 <body style="background-color:black">
     <div id="app">
         <div class="login">
-            <el-form label-width="80px">
-                <el-form-item label="用户名">
-                    <el-input v-model="UserId"></el-input>
+            <el-form label-width="80px" :rules="rules" :model="user" ref="user">
+                <el-form-item label="用户名" :required="true" prop="UserId"> 
+                    <el-input v-model="user.UserId"></el-input>
                 </el-form-item>
-                <el-form-item label="密码">
-                    <el-input type="password" v-model="Password"></el-input>
+                <el-form-item label="密码" :required="true" prop="Password">
+                    <el-input type="password" v-model="user.Password"></el-input>
                 </el-form-item>
-               
+
                 <el-form-item>
-                    <el-button type="primary" @@click="login">登录</el-button>
+                    <el-button type="primary" @@click="login('user')">登录</el-button>
                     <el-link style="float:right" href="/user/register" type="primary">注册</el-link>
                 </el-form-item>
             </el-form>
@@ -49,14 +48,33 @@
             el: '#app',
             data: function () {
                 return {
-                    UserId: '',
-                    Password: ''
+                    user: {
+                        UserId: '',
+                        Password: ''
+                    },
+                    rules: {
+                        UserId: [
+                            { required: true, message: '请输入账号', trigger: 'blur' },
+                            { min: 4, max: 15, message: '长度在 4 到 15 个字符', trigger: 'blur' }
+                        ],
+                        Password: [
+                            { required: true, message: '请输入密码', trigger: 'blur' },
+                            { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+                        ]
+                    }
                 }
             },
             methods: {
-                login: function () {
-                    var vm = this;
-                    var url = "/api/auth/login";
+                login: function (formData) {
+                    var vm = this, url = "/api/auth/login", param = vm.user;
+                    param.Password = window.btoa(param.Password);  //base64 加密
+                    this.$refs[formData].validate((valid) => {
+                        if (valid) {
+                            axios.post(url, param).then(function (response) {
+                                console.log(response.data);
+                            });
+                        }
+                    });
                 }
             }
         })

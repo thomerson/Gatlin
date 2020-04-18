@@ -31,35 +31,32 @@ namespace Thomerson.Gatlin.Controllers
             var currentUser = Service.Get(user.UserId);
             if (currentUser == null)
             {
-                var password = MD5Core.ToMD5($"{user.UserId}{user.Password}{currentUser.Salt}");
-                if (password != currentUser.Password)
-                {
-                    return BadRequest(new { message = "用户名或密码不正确" });
-                }
-                var claims = new[]
-                {
+                return BadRequest(new { message = "用户名或密码不正确" });
+            }
+            var password = MD5Core.ToMD5($"{user.UserId}{user.Password}{currentUser.Salt}");
+            if (password != currentUser.Password)
+            {
+                return BadRequest(new { message = "用户名或密码不正确" });
+            }
+            var claims = new[]
+            {
                     new Claim(JwtRegisteredClaimNames.Nbf,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}") ,
                     new Claim (JwtRegisteredClaimNames.Exp,$"{new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds()}"),
                     new Claim(ClaimTypes.NameIdentifier, user.UserId)  //token 添加用户名
                 };
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppCommon.SecurityKey));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var token = new JwtSecurityToken(
-                    issuer: AppCommon.Domain,
-                    audience: AppCommon.Domain,
-                    claims: claims,
-                    expires: DateTime.Now.AddMinutes(30),
-                    signingCredentials: creds);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppCommon.SecurityKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                issuer: AppCommon.Domain,
+                audience: AppCommon.Domain,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds);
 
-                return Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token)
-                });
-            }
-            else
+            return Ok(new
             {
-                return BadRequest(new { message = "用户名或密码不正确" });
-            }
+                token = new JwtSecurityTokenHandler().WriteToken(token)
+            });
         }
 
         [AllowAnonymous]
@@ -75,8 +72,9 @@ namespace Thomerson.Gatlin.Controllers
 
             model.Salt = Guid.NewGuid().ToString().Replace("-", "");
             model.Password = MD5Core.ToMD5($"{model.UserId}{model.Password}{model.Salt}");
-
-            Service.Insert(model);
+            model.LastUpdateStamp = DateTime.Now;
+            model.CreateStamp = DateTime.Now;
+            Service.Insert(model, model.UserId);
             return Ok();
         }
 

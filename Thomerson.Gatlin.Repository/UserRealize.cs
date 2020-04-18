@@ -9,7 +9,7 @@ using Thomerson.Gatlin.Model.Page;
 
 namespace Thomerson.Gatlin.Repository
 {
-    public class UserRealize : BaseRepository<User>, IUserService
+    public class UserRealize : BaseDbRepository<User>, IUserService
     {
         public User Get(string userId)
         {

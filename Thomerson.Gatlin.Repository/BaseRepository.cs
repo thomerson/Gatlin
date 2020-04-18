@@ -6,6 +6,7 @@ using System.Linq;
 using Thomerson.Gatlin.Contract;
 using Thomerson.Gatlin.Model;
 using Thomerson.Gatlin.Model.Options;
+using Thomerson.Gatlin.Utils;
 
 namespace Thomerson.Gatlin.Repository
 {
@@ -58,10 +59,11 @@ namespace Thomerson.Gatlin.Repository
             }
         }
 
-        public T Insert(T t)
+        public Guid Insert(T t)
         {
             using (var conn = ConnectionFactory.CreateSqlConnection())
             {
+                t.Id = SequentialGuid.Instance.Create(SequentialGuid.SequentialGuidDatabaseType.SqlServer);
                 return conn.Insert<T>(t);
             }
         }
