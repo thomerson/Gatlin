@@ -10,6 +10,6 @@ namespace Thomerson.Gatlin.Contract
     {
         User Get(string userId);
 
-        Tuple<int, IEnumerable<User>> GetPage(UserCriteria criteria);
+        PaginationResult<User> GetPage(UserCriteria criteria);
     }
 }

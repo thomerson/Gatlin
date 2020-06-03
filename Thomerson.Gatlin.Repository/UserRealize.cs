@@ -19,26 +19,43 @@ namespace Thomerson.Gatlin.Repository
             }
         }
 
-        public Tuple<int, IEnumerable<User>> GetPage(UserCriteria criteria)
+        public PaginationResult<User> GetPage(UserCriteria criteria)
         {
             //object predicate
             using (var conn = ConnectionFactory.CreateSqlConnection())
             {
                 var total = conn.Count<User>(null);
                 var sort = new List<ISort>();
-                foreach (var item in criteria.OyderBy)
+                if (criteria.OyderBy != null && criteria.OyderBy.Count > 0)
+                {
+                    foreach (var item in criteria.OyderBy)
+                    {
+                        sort.Add(new Sort()
+                        {
+                            PropertyName = item.ColumnName,
+                            Ascending = item.IsASC
+                        });
+                    }
+                }
+                else
                 {
                     sort.Add(new Sort()
                     {
-                        PropertyName = item.ColumnName,
-                        Ascending = item.IsASC
+                        PropertyName = nameof(User.CreateStamp),
+                        Ascending = false
                     });
                 }
 
-                return new Tuple<int, IEnumerable<User>>(
-                    total,
-                    conn.GetPage<User>(null, sort, criteria.CurrentPage, criteria.PageSize
-                    ).ToList());
+                var list = conn.GetPage<User>(null, sort, criteria.CurrentPage, criteria.PageSize).ToList();
+
+                return new PaginationResult<User>()
+                {
+                    Total = total,
+                    Data = list,
+                    PageSize = criteria.PageSize,
+                    CurrentPage = criteria.CurrentPage,
+                    OyderBy = criteria.OyderBy
+                };
             }
         }
     }

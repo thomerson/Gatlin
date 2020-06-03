@@ -21,11 +21,21 @@
                 get: function () {
                     var vm = this;
                     var url = "/api/user/getpage";
+                    axios.post('/user/GetPage', {})
+                        .then(function (response) {
+                            console.info(response);
+                        })
+                        .catch(function (error) {
+                            console.debug(error);
+                        });
                 },
                 save: function () {
                     var vm = this;
                     var url = "/api/user/login";
                 }
+            },
+            mounted: function () {
+                this.get();
             }
         })
     </script>

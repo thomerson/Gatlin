@@ -20,7 +20,7 @@ namespace Thomerson.Gatlin.API
 
         [HttpPost]
         [Route("getpage")]
-        public Tuple<int, IEnumerable<User>> GetPage(UserCriteria criteria)
+        public PaginationResult<User> GetPage(UserCriteria criteria)
         {
             return UserService.GetPage(criteria);
         }

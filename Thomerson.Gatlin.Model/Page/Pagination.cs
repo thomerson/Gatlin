@@ -7,7 +7,7 @@ namespace Thomerson.Gatlin.Model.Page
         private int _CurrentPage;
         public int CurrentPage
         {
-            get { return _CurrentPage > 0 ? _CurrentPage : 1; }
+            get { return _CurrentPage > 0 ? _CurrentPage : 0; }
             set { _CurrentPage = value; }
         }
         private int _PageSize { get; set; }
