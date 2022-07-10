@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog;
 using System.IO;
+using Thomerson.Gatlin.Core;
 using Thomerson.Gatlin.Core.Midware;
 
 namespace Thomerson.Gatlin
@@ -35,6 +36,22 @@ namespace Thomerson.Gatlin
 
             //DI
             services.AddIOCMidware();
+
+            //HttpClient
+            services.AddHttpClient();
+
+            ////HttpClient设置请求头
+            //services.AddHttpClient("github", c =>
+            //{
+            //    c.BaseAddress = new System.Uri("https://api.github.com/");
+            //    c.DefaultRequestHeaders.Add("content-type", "application/json");
+            //    c.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat");
+            //    c.DefaultRequestHeaders.Add("Referer", "");
+            //});
+            //services.AddHttpClient<GitHubClient>();
+
+            services.AddHttpClient<IGitHubClient, GitHubClient>();
+
             //MVC 配置
             services.AddMvcMidWare();
 
