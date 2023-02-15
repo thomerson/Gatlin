@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using NLog;
 using Thomerson.Gatlin.Models;
@@ -15,9 +17,11 @@ namespace Thomerson.Gatlin.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IDistributedCache _distributedCache;
+        public HomeController(ILogger<HomeController> logger, IDistributedCache distributedCache)
         {
             _logger = logger;
+            _distributedCache = distributedCache;
         }
 
         public IActionResult Index()
@@ -41,6 +45,16 @@ namespace Thomerson.Gatlin.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        [Route("RedisSession")]
+        public async Task<IActionResult> RedisSession()
+        {
+            HttpContext.Session.SetString("userId", "test");
+            HttpContext.Session.SetString("ip", "127.0.0.1");
+            HttpContext.Session.SetString("loginStamp", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            return Ok("OK");
         }
     }
 }

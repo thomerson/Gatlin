@@ -22,8 +22,18 @@ namespace Thomerson.Gatlin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // 配置redis
+            services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = "127.0.0.1";
+                option.InstanceName = "gatlin";
+            });
+
             //Cookie 设置
             services.AddCookieMidware();
+
+            // session 设置 UseSession需要写在UseMvc之前
+            services.AddSession();
 
             //跨域设置
             services.AddCorsMidware();
@@ -76,12 +86,15 @@ namespace Thomerson.Gatlin
             }
 
             #region NLog配置
-            LogManager.LoadConfiguration($"{ Directory.GetCurrentDirectory()}\\Nlog.config");
+            LogManager.LoadConfiguration($"{Directory.GetCurrentDirectory()}\\Nlog.config");
             //过时
             //loggerFactory.AddNLog(); // 添加NLog
             //loggerFactory.ConfigureNLog($"{Directory.GetCurrentDirectory()}\\Nlog.config"); // 添加Nlog.config配置文件
             //loggerFactory.AddDebug();
             #endregion
+
+            // session
+            app.UseSession();
 
             app.UseStaticFiles();
 
